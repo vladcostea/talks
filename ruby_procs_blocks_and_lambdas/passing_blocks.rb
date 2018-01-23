@@ -1,8 +1,3 @@
-# What's a block?
-# 
-# Blocks are groups of statements that can be passed as a whole 
-# to a method call or passed around as arguments to other functions
-# 
 # All Ruby methods implicitly take a block
 # 
 # There are a few ways to use blocks from methods

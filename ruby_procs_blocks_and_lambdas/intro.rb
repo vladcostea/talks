@@ -1,17 +1,25 @@
+# What's a block?
+# 
+# Blocks are groups of statements that can be passed as a whole 
+# to a method call or passed around as arguments to other functions
+# 
+# Blocks can be seen as "callbacks" to other method calls
+
 # We've all used blocks in ruby wether we wanted to or not
 # 
 # Iterating, filtering and transforming collections of things in ruby requires the use of blocks
-# 
 
 require 'pp'
 
-pp [1, 2, 3].map { |x| x * 2 }
+range = (1..5)
 
-pp [1, 2, 3, 4, 5].select { |x| x.odd? }
+pp range.map { |x| x * 2 }
 
-pp [1, 2, 3, 4, 5].reject(&:even?)
+pp range.select { |x| x.odd? }
 
-pp [1, 2, 3, 4, 5].reduce(1) { |acc, e| acc * e }
+pp range.reject(&:even?)
+
+pp range.reduce(1) { |acc, e| acc * e }
 
 # We can use blocks when opening files
 # The File.open method receives a block and yields a File object

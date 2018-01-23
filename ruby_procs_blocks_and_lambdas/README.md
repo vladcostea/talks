@@ -1,7 +1,7 @@
 ## Table of Contents
 
 1. Intro
-2. Using blocks
+2. Passing blocks
 3. Passing things as blocks
 4. Procs and Lambdas
 5. Symbol#to_proc
