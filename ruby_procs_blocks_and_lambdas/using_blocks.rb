@@ -54,6 +54,9 @@ multi_yield { |x| puts "I received #{x}" }
 
 # The ampersand '&' tells ruby to treat that parameter as a block
 # If it's already a Proc object, Ruby will treat it as the implicit block
+# 
+# When we write our method definition, we can explicitly state that we expect this 
+# method to possibly take a block by prefixing the last parameter with an &
 def needs_ampersand &block
   block.call
 end
