@@ -1,66 +1,66 @@
+
+
+
+
+
+
+# Passing Blocks
+
 # All Ruby methods implicitly take a block
-# 
 # There are a few ways to use blocks from methods
 
-# As standalone arguments
-def i_take_a_block &block
-  block.call
-end
-
-i_take_a_block { puts "I take a block" }
-
 # Implicitly, using a yield statement
-def i_use_yield
+def i_take_a_block
   yield
 end
 
-i_use_yield { puts "I was yielded" }
+i_take_a_block { puts "i was called"}
+
 
 # Methods can check if a block was given
-def not_sure_if_block
+def i_check_if_block
   if block_given?
     yield
   else
-    puts "No block given"
+    puts "no block"
   end
 end
 
-not_sure_if_block
+i_check_if_block
+i_check_if_block { puts "i was yielded"}
 
-not_sure_if_block { puts "Block given and yielded" }
 
 # Yield does not skip the code after it
-# Think how File.open, when receiving a block closes the file
-def i_continue_after_yield
+# Think how File.open, when receiving a block, closes the file
+# after the block is done
+def i_continue
   yield
-  puts "I am after yield"
+  puts "after yield"
 end
+i_continue { puts "in yield"}
 
-i_continue_after_yield { puts "I am before yield" }
 
 # Yield can be called with values and can be called multiple times
-def multi_yield
-  i = 0
-  yield i + 1
-  yield i + 2
+def i_generate
+  yield 1
+  yield 2
 end
+i_generate { |x| puts x }
 
-multi_yield { |x| puts "I received #{x}" }
 
-# The ampersand '&' tells ruby to treat that parameter as a block
-# If it's already a Proc object, Ruby will treat it as the implicit block
+# When we write our method definition, we can explicitly state that we expect 
+# this method to possibly take a block by prefixing the last parameter 
+# with an & (ampersand)
 # 
-# When we write our method definition, we can explicitly state that we expect this 
-# method to possibly take a block by prefixing the last parameter with an &
-def needs_ampersand &block
-  block.call
+# If it's already a Proc object, Ruby will treat it as the implicit block
+def i_take_an_explicit_block &block
+  puts block.inspect
 end
+i_take_an_explicit_block do
+end
+i_take_an_explicit_block {}
+i_take_an_explicit_block
 
-needs_ampersand { puts "blocking" }
 
 # Blocks are just procs
-def i_take_a_proc_as_a_block &proc_obj
-  puts proc_obj.inspect
-end
-
-i_take_a_proc_as_a_block { }
+# do...end is just syntactic sugar

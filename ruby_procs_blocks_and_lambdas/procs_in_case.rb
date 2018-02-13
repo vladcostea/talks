@@ -1,5 +1,11 @@
+
+
+
+
+
+# Procs in case
+
 # An interesting combo is using the case statement with procs and lambdas
-# 
 # Case uses the 'case equality operator' (===) to test equality
 # 
 # It turns out that the === method is defined in the Proc class 
@@ -10,18 +16,24 @@
 #   call(val)
 # end
 
-is_dog = ->(val) { val[:animal] == "dog" }
+meetup = { type: 'ruby' }
 
-case { animal: "dog" }
-when is_dog
-  puts "bark"
-when ->(val) { val[:animal] == "frog" }
-  puts "croak"
+case meetup
+  when ->(m) { m[:type] == 'ruby'}
+    puts "yay"
+  when ->(m) { m[:type] == 'php' }
+    puts 'nay'
+  end
+
+class Meetup
+  def self.of_type(type)
+    ->(meetup) { meetup[:type] == type }
+  end
 end
 
-case 5
-when :odd?.to_proc
-  puts "odd"
-when :even?.to_proc
-  puts "even"
-end
+case meetup
+  when Meetup.of_type('ruby')
+    puts "yay"
+  when Meetup.of_type('php')
+    puts 'nay'
+  end
